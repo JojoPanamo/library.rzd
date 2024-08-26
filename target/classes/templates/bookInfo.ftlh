@@ -5,18 +5,13 @@
         Самая большая онлайн библиотека
     </title>
 <body>
-<h1>Последние книги</h1>
-<#list home as HomePage>
-    <div>
-        <p>${HomePage.id} ${HomePage.title} ${HomePage.author} | <a href="/bookInfo/${HomePage.id}">Подробнее о книге...</a> </p>
-    </div>
-</#list>
+<h1>Информация о книге</h1>
+<p><b>${bookInfo.id}</b></p>
+<p><b>Название книги: ${bookInfo.title}</b></p>
+<p><b>Автор: ${bookInfo.author}</b></p>
 <hr>
-<h3>Добавить новую книгу</h3>
-<form action="/home/create" method="post">
-    Название книги: <input type="text" name="title"/> <br><br>
-    Название книги: <input type="text" name="author"/> <br><br>
-    <input type="submit" value="Сохранить">
+<form action="/bookInfo/${id}" method="post">
+    <input type="submit" value="Удалить книгу">
 
 </form>
 </body>

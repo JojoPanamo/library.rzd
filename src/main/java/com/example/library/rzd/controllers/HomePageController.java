@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,14 +25,14 @@ public class HomePageController {
         homePageService.saveHomePage(homePage);
         return "redirect:/";
     }
-    @PostMapping("/home/delete/{id}")
+    @PostMapping("/bookInfo/{id}")
     public String deleteBook(@PathVariable Long id) {
         homePageService.deleteHomePage(id);
-        return "bookInfo";
+        return "redirect:/";
     }
     @GetMapping("/bookInfo/{id}")
     public String bookInfo(@PathVariable Long id, Model model) {
-        model.addAttribute("homePage", homePageService.getBookById(id));
-        return "redirect:/";
+        model.addAttribute("bookInfo", homePageService.getBookById(id));
+        return "bookInfo";
     }
 }
