@@ -4,12 +4,10 @@
     <title>
         Самая большая онлайн библиотека
     </title>
-    <body>
-<h1>Последние книги</h1>
+<body>
+<h1>Информация о книге</h1>
 <#list home as HomePage>
-    <div>
-        <p>${HomePage.id} ${HomePage.title} ${HomePage.author} | <a href="/bookInfo/${HomePage.id}">Подробнее о книге...</a> </p>
-    </div>
+
 </#list>
 <hr>
 <h3>Добавить новую книгу</h3>

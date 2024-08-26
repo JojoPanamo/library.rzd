@@ -4,7 +4,7 @@
     <title>
         Самая большая онлайн библиотека
     </title>
-    <body>
+<body>
 <h1>Последние книги</h1>
 <#list home as HomePage>
     <div>
