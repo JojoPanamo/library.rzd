@@ -6,7 +6,7 @@
     <button type="submit">Search</button>
 </form>
 <ul>
-<#list book as book>
+<#list books as book>
     <li><a href="/book/${book.id}">${book.title}</a></li>
 </#list>
 </ul>

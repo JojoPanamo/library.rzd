@@ -6,7 +6,7 @@
 <body>
 <h1>Books by ${author.name}</h1>
 <ul>
-    <#list book as book>
+    <#list books as book>
         <li>${book.title}</li>
     </#list>
 </ul>
