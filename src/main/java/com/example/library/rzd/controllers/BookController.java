@@ -1,8 +1,10 @@
 package com.example.library.rzd.controllers;
 
+import com.example.library.rzd.models.Author;
 import com.example.library.rzd.models.Book;
 import com.example.library.rzd.srevices.AuthorService;
 import com.example.library.rzd.srevices.BookService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,10 +12,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/books")
 public class BookController {
     @Autowired
     private BookService bookService;
+
     @Autowired
     private AuthorService authorService;
 
@@ -41,12 +45,19 @@ public class BookController {
     @GetMapping("/add")
     public String showAddBookForm(Model model) {
         model.addAttribute("book", new Book());
-        model.addAttribute("authors", authorService.findAll());
+        model.addAttribute("author", new Author());
         return "add-book";
     }
 
     @PostMapping("/add")
-    public String addBook(@ModelAttribute Book book) {
+    public String addBook(@ModelAttribute Book book, @RequestParam String authorName, Model model) {
+        Author author = authorService.findByName(authorName);
+        if (author == null) {
+            author = new Author();
+            author.setName(authorName);
+            authorService.save(author);
+        }
+        book.setAuthor(author);
         bookService.save(book);
         return "redirect:/";
     }

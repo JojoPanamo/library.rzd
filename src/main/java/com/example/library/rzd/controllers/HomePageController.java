@@ -15,7 +15,7 @@ public class HomePageController {
     private BookService bookService;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String homePage(Model model) {
         List<Book> latestBooks = bookService.findLatestBooks(10);
         model.addAttribute("books", latestBooks);
         return "home";

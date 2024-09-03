@@ -17,5 +17,8 @@
 <#else>
         <p>No books available.</p>
 </#if>
+<hr>
+<b> <a href="/books/add">Добавить новую книгу</a><br>
+    <b> <a href="/authors">Список авторов</a>
 </body>
 </html>
