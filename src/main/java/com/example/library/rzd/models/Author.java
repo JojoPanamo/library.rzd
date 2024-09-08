@@ -14,7 +14,7 @@ public class Author {
     private Long id;
     @Column(name = "name")
     private String name;
-    @OneToMany(mappedBy = "author")
+    @ManyToMany(mappedBy = "authors")
     private List<Book> books;
 
 

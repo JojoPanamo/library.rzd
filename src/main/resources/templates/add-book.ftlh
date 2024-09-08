@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Add Book</title>
-</head>
 <body>
-<h1>Add Book</h1>
+<h1>Добавление новой книги</h1>
 <form method="post" action="/books/add">
-    <label for="title">Title:</label>
+    <label for="title">Название:</label>
     <input type="text" id="title" name="title" required>
 
-    <label for="authorName">Author Name:</label>
-    <input type="text" id="authorName" name="authorName" required>
+    <label for="authorNames">Имя автора(авторов через запятую): </label>
+    <input type="text" id="authorNames" name="authorNames" required>
 
-    <button type="submit">Add Book</button>
+    <button type="submit">Добавить</button>
+</form>
+<form method="get" action="/">
+    <button type="submit">На главную</button>
 </form>
 </body>
 </html>

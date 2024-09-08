@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -25,7 +27,7 @@ public class BookController {
     public String listBooks(Model model) {
         List<Book> books = bookService.findAll();
         model.addAttribute("books", books);
-        return "book";
+        return "all_books";
     }
 
     @GetMapping("/{id}")
@@ -39,7 +41,7 @@ public class BookController {
     public String searchBooks(@RequestParam String title, Model model) {
         List<Book> books = bookService.searchByTitle(title);
         model.addAttribute("books", books);
-        return "book";
+        return "all_books";
     }
 
     @GetMapping("/add")
@@ -50,14 +52,18 @@ public class BookController {
     }
 
     @PostMapping("/add")
-    public String addBook(@ModelAttribute Book book, @RequestParam String authorName, Model model) {
-        Author author = authorService.findByName(authorName);
-        if (author == null) {
-            author = new Author();
-            author.setName(authorName);
-            authorService.save(author);
+    public String addBook(@ModelAttribute Book book, @RequestParam List<String> authorNames) {
+        List<Author> authors = new ArrayList<>();
+        for (String authorName : authorNames) {
+            Author author = authorService.findByName(authorName);
+            if (author == null) {
+                author = new Author();
+                author.setName(authorName);
+                authorService.save(author);
+            }
+            authors.add(author);
         }
-        book.setAuthor(author);
+        book.setAuthors(authors);
         bookService.save(book);
         return "redirect:/";
     }

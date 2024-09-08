@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>${author.name}'s Books</title>
-</head>
 <body>
-<h1>Books by ${author.name}</h1>
+<h1>Все книги автора: ${author.name}</h1>
 <ul>
     <#list books as book>
-        <li>${book.title}</li>
+        <li><a href="/books/${book.id}">${book.title}</a></li>
     </#list>
 </ul>
+<form method="get" action="/">
+        <button type="submit">На главную</button>
+</form>
 </body>
 </html>

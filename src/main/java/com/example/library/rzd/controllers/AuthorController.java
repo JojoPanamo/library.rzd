@@ -33,7 +33,7 @@ public class AuthorController {
     @GetMapping("/{id}")
     public String getAuthorBooks(@PathVariable Long id, Model model) {
         Author author = authorService.findById(id);
-        List<Book> books = bookService.getAuthorBooks(author); // Поиск книг по объекту Author
+        List<Book> books = bookService.getAuthorBooks(author);
         model.addAttribute("author", author);
         model.addAttribute("books", books);
         return "author-books";
