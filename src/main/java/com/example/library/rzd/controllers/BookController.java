@@ -52,7 +52,15 @@ public class BookController {
     }
 
     @PostMapping("/add")
-    public String addBook(@ModelAttribute Book book, @RequestParam List<String> authorNames) {
+    public String addBook(@ModelAttribute Book book, @RequestParam List<String> authorNames, Model model) {
+        String trimmedTitle = book.getTitle().trim();
+        List<String> trimmedAuthorsNames = authorNames.stream().map(String::trim).toList();
+        if(trimmedTitle.isEmpty() || trimmedAuthorsNames.isEmpty()) {
+            model.addAttribute("error", "Название книги и имена авторов не могут содержать только пробелы.");
+            model.addAttribute("book", book);
+            model.addAttribute("authorNames", authorNames);
+            return "add-book";
+        }
         List<Author> authors = new ArrayList<>();
         for (String authorName : authorNames) {
             Author author = authorService.findByName(authorName);
