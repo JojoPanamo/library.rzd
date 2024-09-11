@@ -46,31 +46,47 @@ public class BookController {
 
     @GetMapping("/add")
     public String showAddBookForm(Model model) {
+        List<Author> existingAuthors = authorService.findAll();
+        model.addAttribute("existingAuthors", existingAuthors);
         model.addAttribute("book", new Book());
-        model.addAttribute("author", new Author());
         return "add-book";
     }
 
+
     @PostMapping("/add")
-    public String addBook(@ModelAttribute Book book, @RequestParam List<String> authorNames, Model model) {
+    public String addBook(@ModelAttribute Book book, @RequestParam(required = false) List<String> existingAuthors, @RequestParam(required = false) String authorNames, Model model) {
         String trimmedTitle = book.getTitle().trim();
-        List<String> trimmedAuthorsNames = authorNames.stream().map(String::trim).toList();
-        if(trimmedTitle.isEmpty() || trimmedAuthorsNames.isEmpty()) {
+        List<String> trimmedAuthorsNames = List.of(authorNames.split(",")).stream().map(String::trim).toList();
+
+        if (trimmedTitle.isEmpty() && (trimmedAuthorsNames.isEmpty() || existingAuthors.isEmpty())) {
             model.addAttribute("error", "Название книги и имена авторов не могут содержать только пробелы.");
             model.addAttribute("book", book);
-            model.addAttribute("authorNames", authorNames);
+            model.addAttribute("existingAuthors", authorService.findAll());
             return "add-book";
         }
+
         List<Author> authors = new ArrayList<>();
-        for (String authorName : authorNames) {
-            Author author = authorService.findByName(authorName);
-            if (author == null) {
-                author = new Author();
-                author.setName(authorName);
-                authorService.save(author);
+
+        for (String authorId : existingAuthors) {
+            if (!authorId.isEmpty()) {
+                Author author = authorService.findById(Long.parseLong(authorId));
+                if (author != null) {
+                    authors.add(author);
+                }
             }
-            authors.add(author);
         }
+        for (String authorName : trimmedAuthorsNames) {
+            if (!authorName.isEmpty()) {
+                Author author = authorService.findByName(authorName);
+                if (author == null) {
+                    author = new Author();
+                    author.setName(authorName);
+                    authorService.save(author);
+                }
+                authors.add(author);
+            }
+        }
+
         book.setAuthors(authors);
         bookService.save(book);
         return "redirect:/";
