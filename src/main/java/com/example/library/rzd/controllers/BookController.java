@@ -60,9 +60,9 @@ public class BookController {
                           @RequestParam(required = false) String authorNames,
                           Model model) {
 
-        String trimmedTitle = book.getTitle().trim();
+        String trimmedTitle = book.getTitle().trim(); //получаем название книги без пробелов
 
-        List<String> trimmedAuthorsNames = authorNames != null ?
+        List<String> trimmedAuthorsNames = authorNames != null ? //проверка на null введенных авторов
                 List.of(authorNames.split(",")).stream()
                         .map(String::trim)
                         .filter(name -> !name.isEmpty())
@@ -77,7 +77,7 @@ public class BookController {
         }
 
         List<Author> authors = new ArrayList<>();
-
+        //проверка на null авторов из списка
         if (existingAuthors != null) {
             for (String authorId : existingAuthors) {
                 if (!authorId.isEmpty()) {
