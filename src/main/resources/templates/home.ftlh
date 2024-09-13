@@ -13,6 +13,11 @@
         h1 {
             color: #333;
         }
+        .button-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
 
         form {
             margin-bottom: 20px;
@@ -62,7 +67,7 @@
         a:hover {
             text-decoration: underline;
         }
-        
+
         text{
             text-decoration: none;
             color: cadetblue;
@@ -70,7 +75,18 @@
     </style>
 </head>
 <body>
-<h1>Книги в нашей библиотеке</h1>
+<div class="button-container">
+<form method="get" action="/books/add">
+    <button type="submit">Добавить новую книгу</button>
+</form>
+<form method="get" action="/authors">
+    <button type="submit">Список авторов</button>
+</form>
+<form method="get" action="/books">
+    <button type="submit">Список всех книг</button>
+</form>
+</div>
+<h2>Книги в нашей библиотеке</h2>
 <#if books?? && (books?size > 0)>
     <ul>
         <#list books as book>
@@ -87,16 +103,5 @@
 <#else>
     <p>Пока нет книг</p>
 </#if>
-<hr>
-<br>
-    <form method="get" action="/books/add">
-        <button type="submit">Добавить новую книгу</button>
-    </form>
-    <form method="get" action="/authors">
-    <button type="submit">Список авторов</button>
-    </form>
-    <form method="get" action="/books">
-    <button type="submit">Список всех книг</button>
-    </form>
 </body>
 </html>

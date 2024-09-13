@@ -61,14 +61,22 @@
         a:hover {
             text-decoration: underline;
         }
+        .button-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
 
     </style>
 </head>
 <body>
-
+<div class="button-container">
+    <form method="get" action="/">
+        <button type="submit">На главную</button>
+    </form>
+</div>
 <div class="container">
-    <h1>Авторы</h1>
-
+    <h2>Авторы</h2>
     <input type="text" id="search" placeholder="Поиск автора" onkeyup="filterAuthors()">
 
     <ul id="authorList">
@@ -76,11 +84,6 @@
             <li><a href="/authors/${author.id}">${author.name}</a></li>
         </#list>
     </ul>
-
-    <form method="get" action="/">
-        <button type="submit">На главную</button>
-    </form>
-</div>
 
 <script>
     function filterAuthors() {

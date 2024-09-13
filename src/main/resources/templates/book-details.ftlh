@@ -67,19 +67,26 @@
                         text-decoration: none;
                         color: cadetblue;
                 }
+                .button-container {
+                        display: flex;
+                        gap: 10px;
+                        margin-bottom: 20px;
+                }
         </style>
 </head>
 <body>
-<h1>Книга: ${book.title}</h1>
+<div class="button-container">
+        <form method="get" action="/">
+                <button type="submit">На главную</button>
+        </form>
+</div>
+<h2>Книга: ${book.title}</h2>
 Автор(ы):
 <ul>
     <#list book.authors as author>
         <li><p><a href="/authors/${author.id}">${author.name}</a></li>
     </#list>
 </ul>
-<form method="get" action="/">
-        <button type="submit">На главную</button>
-</form>
 </body>
 </html>
 </body>

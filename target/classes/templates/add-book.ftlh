@@ -58,11 +58,20 @@
         .search-box {
             margin-bottom: 10px;
         }
+        .button-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
-
-<h1>Добавление новой книги</h1>
+<div class="button-container">
+    <form method="get" action="/">
+        <button type="submit">На главную</button>
+    </form>
+</div>
+<h2>Добавление новой книги</h2>
 
 <#if error??>
     <p style="color: red;">${error}</p>
@@ -92,10 +101,6 @@
     <button type="submit">Добавить</button>
 </form>
 
-<form method="get" action="/">
-    <button type="submit">На главную</button>
-</form>
-
 <script>
     function filterAuthors() {
         const searchInput = document.getElementById('search').value.toLowerCase();
@@ -120,7 +125,7 @@
             alert("Пожалуйста, заполните название книги и выберите или добавьте хотя бы одного автора.");
             return false;
         }
-
+        alert("Книга добавлена, спасибо");
         return true;
     }
 </script>

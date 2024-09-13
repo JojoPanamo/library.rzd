@@ -66,9 +66,19 @@
             text-decoration: none;
             color: cadetblue;
         }
+        .button-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
-<h1>Книги в нашей библиотеке</h1>
+<div class="button-container">
+    <form method="get" action="/">
+        <button type="submit">На главную</button>
+    </form>
+</div>
+<h2>Книги в нашей библиотеке</h2>
 <form method="get" action="/books/search">
     <input type="text" name="title" placeholder="Поиск по названию">
     <button type="submit">Поиск</button>
@@ -77,8 +87,5 @@
 <#list books as book>
     <li><a href="/books/${book.id}">${book.title}</a></li>
 </#list>
-    <form method="get" action="/">
-        <button type="submit">На главную</button>
-    </form>
 </ul>
 </html>
