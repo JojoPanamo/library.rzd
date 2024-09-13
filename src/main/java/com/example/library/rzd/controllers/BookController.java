@@ -23,27 +23,28 @@ public class BookController {
     @Autowired
     private AuthorService authorService;
 
+    // Список всех книг
     @GetMapping
     public String listBooks(Model model) {
         List<Book> books = bookService.findAll();
         model.addAttribute("books", books);
         return "all_books";
     }
-
+    //Информация о книге
     @GetMapping("/{id}")
     public String getBookDetails(@PathVariable Long id, Model model) {
         Book book = bookService.findById(id);
         model.addAttribute("book", book);
         return "book-details";
     }
-
+    //Поиск мо названию книги
     @GetMapping("/search")
     public String searchBooks(@RequestParam String title, Model model) {
         List<Book> books = bookService.searchByTitle(title);
         model.addAttribute("books", books);
         return "all_books";
     }
-
+    //Отображение формы создания книги
     @GetMapping("/add")
     public String showAddBookForm(Model model) {
         List<Author> existingAuthors = authorService.findAll();
@@ -52,7 +53,7 @@ public class BookController {
         return "add-book";
     }
 
-
+    //Создание книги с добавлением автора(ов), названия книги
     @PostMapping("/add")
     public String addBook(@ModelAttribute Book book,
                           @RequestParam(required = false) List<String> existingAuthors,

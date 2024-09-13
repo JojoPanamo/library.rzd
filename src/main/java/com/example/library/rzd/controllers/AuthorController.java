@@ -23,13 +23,14 @@ public class AuthorController {
     @Autowired
     private AuthorService authorService;
 
+    //Список авторов
     @GetMapping
     public String listAuthors(Model model) {
         List<Author> authors = authorService.findAll();
         model.addAttribute("authors", authors);
         return "authors";
     }
-
+    //Информация по автору
     @GetMapping("/{id}")
     public String getAuthorBooks(@PathVariable Long id, Model model) {
         Author author = authorService.findById(id);
@@ -38,7 +39,7 @@ public class AuthorController {
         model.addAttribute("books", books);
         return "author-books";
     }
-
+    //Поиск по имени автора
     @GetMapping("/search")
     public String searchAuthors(@RequestParam String name, Model model) {
         List<Author> authors = authorService.searchByName(name);

@@ -14,8 +14,10 @@ public class HomePageController {
     @Autowired
     private BookService bookService;
 
+    //Отображение начальной страницы
     @GetMapping("/")
     public String homePage(Model model) {
+        //на главной странице отображаются последние 10 книг
         List<Book> latestBooks = bookService.findLatestBooks(10);
         model.addAttribute("books", latestBooks);
         return "home";

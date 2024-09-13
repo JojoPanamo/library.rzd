@@ -10,4 +10,11 @@ class ApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	public void testSaveBook(){
+
+	}
+	@Test
+	public void testGetBooksPage() {
+	}
 }
