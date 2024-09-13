@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Authors List</title>
+    <title>Список авторов</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -29,8 +29,8 @@
 
         button {
             padding: 8px 12px;
-            background-color: #007BFF;
-            color: #fff;
+            background-color: cadetblue;
+            color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
@@ -46,38 +46,32 @@
         }
 
         li {
-            background-color: #f9f9f9;
+            background-color: #f9f9f6;
             margin-bottom: 10px;
             padding: 10px;
             border-radius: 4px;
+            color: black;
         }
 
         a {
             text-decoration: none;
-            color: #007BFF;
+            color: cadetblue;
         }
 
         a:hover {
             text-decoration: underline;
         }
 
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Authors</h1>
+    <h1>Авторы</h1>
 
-    <form method="get" action="/authors/search">
-        <input type="text" name="name" placeholder="Search author">
-        <button type="submit">Search</button>
-    </form>
+    <input type="text" id="search" placeholder="Поиск автора" onkeyup="filterAuthors()">
 
-    <ul>
+    <ul id="authorList">
         <#list authors as author>
             <li><a href="/authors/${author.id}">${author.name}</a></li>
         </#list>
@@ -88,5 +82,22 @@
     </form>
 </div>
 
+<script>
+    function filterAuthors() {
+        const searchInput = document.getElementById('search').value.toLowerCase();
+        const authorItems = document.querySelectorAll('#authorList li');
+
+        authorItems.forEach(function(item) {
+            const authorName = item.textContent.toLowerCase();
+            if (authorName.includes(searchInput)) {
+                item.style.display = '';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+</script>
+
 </body>
 </html>
+

@@ -1,5 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang = "en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Последние книги библиотеки</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            font-size: 14px;
+            width: 300px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 8px 12px;
+            background-color: cadetblue;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #f9f9f6;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 4px;
+
+            color: black;
+        }
+
+        a {
+            text-decoration: none;
+            color: cadetblue;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        text{
+            text-decoration: none;
+            color: cadetblue;
+        }
+    </style>
+</head>
 <h1>Книги в нашей библиотеке</h1>
 <form method="get" action="/books/search">
     <input type="text" name="title" placeholder="Поиск по названию">
